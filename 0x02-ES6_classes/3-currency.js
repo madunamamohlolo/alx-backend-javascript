@@ -1,32 +1,40 @@
 class Currency {
-    constructor(code, name) {
-        this._code = typeof code === 'string' ? code : '';
-        this._name = typeof name === 'string' ? name : '';
-    }
+  constructor(code, name) {
+    this.code = code;
+    this.name = name;
+  }
 
-    get code() {
-        return this._code;
+  /**
+   * @param {String} code
+   */
+  set code(code) {
+    if (typeof code !== 'string') {
+      throw new TypeError('Code must be a String');
     }
+    this._code = code;
+  }
 
-    set code(newCode) {
-        if (typeof newCode === 'string') {
-            this._code = newCode;
-        }
-    }
+  get code() {
+    return this._code;
+  }
 
-    get name() {
-        return this._name;
+  /**
+   * @param {String} name
+   */
+  set name(name) {
+    if (typeof name !== 'string') {
+      throw new TypeError('Name must be a String');
     }
+    this._name = name;
+  }
 
-    set name(newName) {
-        if (typeof newName === 'string') {
-            this._name = newName;
-        }
-    }
+  get name() {
+    return this._name;
+  }
 
-    displayFullCurrency() {
-        return `${this._name} (${this._code})`;
-    }
+  displayFullCurrency() {
+    return `${this.name} (${this.code})`;
+  }
 }
 
 export default Currency;

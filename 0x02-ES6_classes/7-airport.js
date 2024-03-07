@@ -1,32 +1,26 @@
-class Airport {
-    constructor(name, code) {
-        this._name = typeof name === 'string' ? name : '';
-        this._code = typeof code === 'string' ? code : '';
-    }
+export default class Airport {
+  constructor(name, code) {
+    this.name = name;
+    this.code = code;
+  }
 
-    get name() {
-        return this._name;
-    }
+  get name() {
+    return this._name;
+  }
 
-    set name(newName) {
-        if (typeof newName === 'string') {
-            this._name = newName;
-        }
-    }
+  set name(value) {
+    this._name = value;
+  }
 
-    get code() {
-        return this._code;
-    }
+  get code() {
+    return this._code;
+  }
 
-    set code(newCode) {
-        if (typeof newCode === 'string') {
-            this._code = newCode;
-        }
-    }
+  set code(value) {
+    this._code = value;
+  }
 
-    toString() {
-        return this._code;
-    }
+  get [Symbol.toStringTag]() {
+    return this._code;
+  }
 }
-
-export default Airport;

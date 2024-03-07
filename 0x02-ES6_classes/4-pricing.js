@@ -1,38 +1,59 @@
-import Currency from "./3-currency.js";
+import Currency from './3-currency';
 
 class Pricing {
-    constructor(amount, currency) {
-        this._amount = typeof amount === 'number' ? amount : 0;
-        this._currency = currency instanceof Currency ? currency : null;
+  constructor(amount, currency) {
+    this.amount = amount;
+    this.currency = currency;
+  }
+
+  /**
+   * @param {Number} amount
+   */
+  set amount(amount) {
+    if (typeof amount !== 'number') {
+      throw new TypeError('Amount must be a Number');
+    }
+    this._amount = amount;
+  }
+
+  get amount() {
+    return this._amount;
+  }
+
+  /**
+   * @param {Currency} currency
+   */
+  set currency(currency) {
+    if (currency instanceof Currency) {
+      this._currency = currency;
+    } else {
+      throw new TypeError('currency must be an instance of Currency');
+    }
+  }
+
+  get currency() {
+    return this._currency;
+  }
+
+  displayFullPrice() {
+    return `${this.amount} ${this.currency.displayFullCurrency()}`;
+  }
+
+  /**
+   * @param {Number} amount
+   * @param {Number} conversionRate
+   */
+  static convertPrice(amount, conversionRate) {
+    if (typeof amount !== 'number') {
+      throw new TypeError('amount must be a number');
     }
 
-    get amount() {
-        return this._amount;
+    if (typeof conversionRate !== 'number') {
+      throw new TypeError('conversionRate must be a number');
     }
 
-    set amount(newAmount) {
-        if (typeof newAmount === 'number') {
-            this._amount = newAmount;
-        }
-    }
-
-    get currency() {
-        return this._currency;
-    }
-
-    set currency(newCurrency) {
-        if (newCurrency instanceof Currency) {
-            this._currency = newCurrency;
-        }
-    }
-
-    displayFullPrice() {
-        return `${this._amount} ${this._currency.name} (${this._currency.code})`;
-    }
-
-    static convertPrice(amount, conversionRate) {
-        return amount * conversionRate;
-    }
+    return amount * conversionRate;
+  }
 }
 
 export default Pricing;
